@@ -21,7 +21,14 @@ _.forEach(keyspaceConfig, config => {
     clientOptions: {
       contactPoints: contactPoints,
       keyspace: config.name,
-      queryOptions: { consistency: consistency }
+      queryOptions: { consistency: consistency },
+      policies: {
+        reconnection: new cassandraDriver.policies.reconnection.ExponentialReconnectionPolicy(1000, 30000)
+      },
+      heartbeat: {
+        interval: 30,
+        timeout: 10
+      }
     },
     ormOptions: {
       defaultReplicationStrategy: replicationStrategy,
