@@ -23,7 +23,7 @@ _.forEach(keyspaceConfig, config => {
       keyspace: config.name,
       queryOptions: { consistency: consistency },
       policies: {
-        reconnection: new cassandraDriver.policies.reconnection.ExponentialReconnectionPolicy(1000, 30000)
+        reconnection: new cassandra.driver.policies.reconnection.ExponentialReconnectionPolicy(1000, 30000)
       },
       heartbeat: {
         interval: 30,
